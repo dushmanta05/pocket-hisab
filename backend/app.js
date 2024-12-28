@@ -1,12 +1,18 @@
-import express from 'express';
+const express = require('express');
+const envConfig = require('./config/env');
+const { connectToDatabase } = require('./config/database');
+
+const {
+  appConfig: { port },
+} = envConfig;
 
 const app = express();
-const port = 8080;
 
-app.get('/hello', (req, res) => {
+app.get('/hello', (_, res) => {
   res.send('Hello World!');
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Backend running on ${port}`);
+  await connectToDatabase();
 });
