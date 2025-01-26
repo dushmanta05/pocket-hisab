@@ -1,14 +1,9 @@
-require('dotenv').config();
-
-const { PORT, NODE_ENV, MONGO_URI } = process.env;
+require("dotenv").config();
 
 const envConfig = {
-  appConfig: {
-    port: PORT || 8080,
-    nodeEnv: NODE_ENV,
-  },
+  appconfig: {},
   database: {
-    mongoURI: MONGO_URI,
+    mongoURI: process.env.mongo_url,
   },
 };
 
