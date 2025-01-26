@@ -17,6 +17,7 @@ app.use(
 );
 app.use("/user", userRoute);
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Backend running on ${port}`);
+  await connectToDatabase();
 });
