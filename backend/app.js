@@ -1,5 +1,5 @@
 const express = require('express');
-const userRoute = require('./routes/userRoute');
+const userRoute = require('./src/routes/userRoute');
 const cors = require('cors');
 const { connectToDatabase } = require('./config/database');
 
