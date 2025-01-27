@@ -1,9 +1,9 @@
 require('dotenv').config();
 
 const envConfig = {
-  appconfig: {},
+  appConfig: {},
   database: {
-    mongoURI: process.env.mongo_url,
+    mongoURI: process.env.MONGO_URI,
   },
 };
 

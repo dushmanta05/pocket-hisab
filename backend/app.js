@@ -1,13 +1,12 @@
 const express = require('express');
-const connectDB = require('./config/databseDb');
 const userRoute = require('./routes/userRoute');
 const cors = require('cors');
+const { connectToDatabase } = require('./config/database');
 
 require('dotenv').config();
 
 const app = express();
 const port = 8080;
-connectDB();
 app.use(express.json());
 app.use(
   cors({
