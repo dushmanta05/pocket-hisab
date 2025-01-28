@@ -1,8 +1,8 @@
-const User = require('../models/User');
+const User = require('../models/user.model');
 
 const createUser = async (req, res) => {
   try {
-    const { userName, fullName, password, email } = req.body;
+    const { userName, firstName, lastName, password, email } = req.body;
     if (!userName || !fullName || !password || !email) {
       return res
         .status(400)

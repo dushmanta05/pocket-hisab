@@ -1,3 +1,8 @@
+# Node Modules
 /node_modules
+
+# Environment Variables
 .env
+
+# Dot Files and Folders
 .vscode/
