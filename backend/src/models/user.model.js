@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const timestampPlugin = require('./plugins/timestamp.plugin');
 
 const userSchema = new mongoose.Schema(
   {
@@ -9,7 +10,11 @@ const userSchema = new mongoose.Schema(
     email: { type: String, unique: true },
     password: { type: String },
   },
-  { timestamps: true }
+  {
+    collection: 'user',
+  }
 );
+
+userSchema.plugin(timestampPlugin);
 
 module.exports = mongoose.model('user', userSchema);
