@@ -8,7 +8,6 @@ const createUser = async (req, res) => {
         .status(400)
         .json({ success: false, message: 'All fields are required.' });
     }
-    // Validate the request body data
 
     const userData = {
       userName,
