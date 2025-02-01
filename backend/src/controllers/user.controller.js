@@ -1,22 +1,26 @@
 const User = require('../models/user.model');
+const { AuthService } = require('../services');
 
 const createUser = async (req, res) => {
   try {
-    const { userName, firstName, lastName, password, email } = req.body;
-    if (!userName || !fullName || !password || !email) {
+    console.log(req.body);
+    const { username, firstName, lastName, password, email } = req.body;
+    if (!username || !firstName || !lastName || !password || !email) {
       return res
         .status(400)
         .json({ success: false, message: 'All fields are required.' });
     }
 
     const userData = {
-      userName,
-      fullName,
-      password,
+      username,
+      firstName,
+      lastName,
+      fullName: `${firstName} ${lastName}`,
+      password: await AuthService.hashPassword(password),
       email,
     };
 
-    const user = User.create(userData);
+    const user = await User.create(userData);
     res.status(201).json({
       success: true,
       message: 'User created successfully.',
@@ -78,8 +82,6 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { userName, fullName, password } = req.body;
-
-    // Validate the request body data
 
     const updateUserData = {
       userName,
