@@ -1,7 +1,9 @@
 const express = require('express');
-const userRoute = require('./src/routes/user.routes');
 const cors = require('cors');
+
 const { connectToDatabase } = require('./config/database');
+const authRouter = require('./src/routes/auth.routes');
+const userRouter = require('./src/routes/user.routes');
 
 require('dotenv').config();
 
@@ -18,7 +20,8 @@ app.get('/', async (req, res) => {
   res.status(200).json({ success: true, message: 'Welcome to Pocket Hisab.' })
 })
 
-app.use('/user', userRoute);
+app.use('/user', userRouter);
+app.use('/auth', authRouter);
 
 app.listen(port, async () => {
   console.log(`Backend running on ${port}`);

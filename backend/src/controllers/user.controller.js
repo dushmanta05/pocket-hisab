@@ -4,9 +4,9 @@ const { validateRequiredFields, filterAllowedFields } = require('../utils/format
 
 const createUser = async (req, res) => {
   try {
-    const requiredFields = ['username', 'firstName', 'lastName', 'password', 'email']
+    const requiredFields = ['username', 'firstName', 'lastName', 'password', 'email'];
 
-    const validation = validateRequiredFields(req.body, requiredFields)
+    const validation = validateRequiredFields(req.body, requiredFields);
     if (!validation.success) {
       return res.status(400).json({ success: false, message: validation.message });
     }
@@ -58,17 +58,13 @@ const getUserById = async (req, res) => {
   const { id } = req.params;
 
   if (!id) {
-    return res
-      .status(400)
-      .json({ success: false, message: 'User ID is required.' });
+    return res.status(400).json({ success: false, message: 'User ID is required.' });
   }
 
   try {
     const user = await User.findById(id);
     if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: 'User not found.' });
+      return res.status(404).json({ success: false, message: 'User not found.' });
     }
 
     res.status(200).json({
@@ -95,7 +91,7 @@ const updateUser = async (req, res) => {
       });
     }
 
-    console.log(req.body)
+    console.log(req.body);
 
     const allowedFields = ['firstName', 'lastName'];
     const updateUserData = filterAllowedFields(req.body, allowedFields);
@@ -131,9 +127,7 @@ const deleteUser = async (req, res) => {
 
     const user = await User.findByIdAndDelete(id);
     if (user) {
-      res
-        .status(200)
-        .json({ success: true, message: 'User deleted successfully.' });
+      res.status(200).json({ success: true, message: 'User deleted successfully.' });
     } else {
       res.status(400).json({ success: false, message: 'User not found' });
     }

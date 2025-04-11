@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
+
 const { timestampPlugin, fieldRenamePlugin, idTransformPlugin } = require('./plugins');
-
-
 
 const userSchema = new mongoose.Schema(
   {

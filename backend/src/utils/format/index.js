@@ -4,9 +4,7 @@ const trimWhiteSpaces = (input) => {
   }
 
   if (Array.isArray(input)) {
-    return input.map(item =>
-      typeof item === 'string' ? item.trim() : item
-    );
+    return input.map((item) => (typeof item === 'string' ? item.trim() : item));
   }
 
   if (typeof input === 'object' && input !== null) {
@@ -41,13 +39,13 @@ const validateRequiredFields = (data, requiredFields) => {
   if (missingFields.length > 0) {
     return {
       success: false,
-      message: `Missing required field(s): ${missingFields.join(', ')}`
+      message: `Missing required field(s): ${missingFields.join(', ')}`,
     };
   }
 
   return {
     success: true,
-    data: result
+    data: result,
   };
 };
 
@@ -55,7 +53,7 @@ const filterAllowedFields = (data, allowedFields) => {
   const trimmedData = trimWhiteSpaces(data);
 
   if (Array.isArray(trimmedData)) {
-    return trimmedData.map(item => {
+    return trimmedData.map((item) => {
       const filteredItem = {};
       for (const key of allowedFields) {
         if (item[key] !== undefined) {
@@ -79,5 +77,4 @@ const filterAllowedFields = (data, allowedFields) => {
   return trimmedData;
 };
 
-
-module.exports = { trimWhiteSpaces, validateRequiredFields, filterAllowedFields }
+module.exports = { trimWhiteSpaces, validateRequiredFields, filterAllowedFields };
