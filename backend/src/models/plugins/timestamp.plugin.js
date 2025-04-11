@@ -11,7 +11,6 @@ const timestampPlugin = (schema) => {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
   });
-  schema.set('versionKey', '_v');
 };
 
 module.exports = timestampPlugin;

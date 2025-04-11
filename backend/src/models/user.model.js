@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const timestampPlugin = require('./plugins/timestamp.plugin');
+const { timestampPlugin, fieldRenamePlugin, idTransformPlugin } = require('./plugins');
+
+
 
 const userSchema = new mongoose.Schema(
   {
@@ -16,5 +18,7 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.plugin(timestampPlugin);
+userSchema.plugin(fieldRenamePlugin);
+userSchema.plugin(idTransformPlugin);
 
 module.exports = mongoose.model('user', userSchema);
