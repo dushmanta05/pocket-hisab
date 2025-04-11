@@ -1,15 +1,16 @@
 const User = require('../models/user.model');
 const { AuthService } = require('../services');
+const { validateRequiredFields, filterAllowedFields } = require('../utils/format');
 
 const createUser = async (req, res) => {
   try {
-    console.log(req.body);
-    const { username, firstName, lastName, password, email } = req.body;
-    if (!username || !firstName || !lastName || !password || !email) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'All fields are required.' });
+    const requiredFields = ['username', 'firstName', 'lastName', 'password', 'email']
+
+    const validation = validateRequiredFields(req.body, requiredFields)
+    if (!validation.success) {
+      return res.status(400).json({ success: false, message: validation.message });
     }
+    const { username, firstName, lastName, password, email } = validation.data;
 
     const userData = {
       username,
@@ -56,6 +57,12 @@ const getAllUser = async (req, res) => {
 const getUserById = async (req, res) => {
   const { id } = req.params;
 
+  if (!id) {
+    return res
+      .status(400)
+      .json({ success: false, message: 'User ID is required.' });
+  }
+
   try {
     const user = await User.findById(id);
     if (!user) {
@@ -81,13 +88,18 @@ const getUserById = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { userName, fullName, password } = req.body;
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: 'User ID is required.',
+      });
+    }
 
-    const updateUserData = {
-      userName,
-      fullName,
-      password,
-    };
+    console.log(req.body)
+
+    const allowedFields = ['firstName', 'lastName'];
+    const updateUserData = filterAllowedFields(req.body, allowedFields);
+    console.log(updateUserData);
 
     const updatedUser = await User.findByIdAndUpdate(id, updateUserData, {
       new: true,
@@ -110,6 +122,13 @@ const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
 
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: 'User ID is required.',
+      });
+    }
+
     const user = await User.findByIdAndDelete(id);
     if (user) {
       res
@@ -125,18 +144,6 @@ const deleteUser = async (req, res) => {
       error: error.message,
     });
   }
-};
-
-const loginUser = () => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res
-      .status(404)
-      .json({ success: false, message: 'Missing email or password' });
-  }
-
-  const user = User.findOne(email);
 };
 
 module.exports = {

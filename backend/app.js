@@ -14,6 +14,10 @@ app.use(
     methods: ['GET', 'PUT', 'DELETE', 'POST'],
   })
 );
+app.get('/', async (req, res) => {
+  res.status(200).json({ success: true, message: 'Welcome to Pocket Hisab.' })
+})
+
 app.use('/user', userRoute);
 
 app.listen(port, async () => {
