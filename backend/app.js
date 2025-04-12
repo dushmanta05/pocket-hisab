@@ -17,8 +17,8 @@ app.use(
   })
 );
 app.get('/', async (req, res) => {
-  res.status(200).json({ success: true, message: 'Welcome to Pocket Hisab.' })
-})
+  res.status(200).json({ success: true, message: 'Welcome to Pocket Hisab.' });
+});
 
 app.use('/user', userRouter);
 app.use('/auth', authRouter);

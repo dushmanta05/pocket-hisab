@@ -9,7 +9,7 @@ const idTransformPlugin = (schema) => {
       ret.id = ret._id.toString();
       const { _id, ...restFields } = ret;
       return { id: ret.id, ...restFields };
-    }
+    },
   };
 
   schema.set('toJSON', transformOptions);
