@@ -48,6 +48,3 @@ app.*.map.json
 /.vscode
 
 # Temporary ignore
-android/app/src/main/res/mipmap-*/ic_launcher.png
-android/app/src/main/res/mipmap-*/ic_launcher_foreground.png
-android/app/src/main/res/mipmap-*/ic_launcher_round.png
